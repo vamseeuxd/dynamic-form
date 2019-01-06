@@ -63,12 +63,42 @@ export class DynamicFormComponent implements OnInit {
           return isNotValid1 && !_form.controls[option.name].pristine;
           break;
         case 'min':
-          const isNotValid2 = (option.max) ? new Date(this.data[option.name]) < new Date(option.min) : false;
+          const isNotValid2 = (option.min) ? new Date(this.data[option.name]) < new Date(option.min) : false;
           this.updateValidators(option, validationType, isNotValid2);
           return isNotValid2;
           break;
         case 'max':
-          const isNotValid3 = (option.min) ? new Date(this.data[option.name]) > new Date(option.max) : false;
+          const isNotValid3 = (option.max) ? new Date(this.data[option.name]) > new Date(option.max) : false;
+          this.updateValidators(option, validationType, isNotValid3);
+          return isNotValid3;
+          break;
+      }
+    } else if (option.type === 'number') {
+      switch (validationType) {
+        case 'required':
+          const isNotValid1 = (
+            _form.controls[option.name] &&
+            _form.controls[option.name].errors &&
+            _form.controls[option.name].errors[validationType]
+          );
+          this.updateValidators(option, validationType, isNotValid1);
+          return isNotValid1 && !_form.controls[option.name].pristine;
+          break;
+        case 'min':
+          if (
+            _form.controls[option.name] &&
+            _form.controls[option.name].errors &&
+            _form.controls[option.name].errors['required']
+          ) {
+            return false;
+          } else {
+            const isNotValid2 = (option.min) ? (this.data[option.name] < option.min) : false;
+            this.updateValidators(option, validationType, isNotValid2);
+            return isNotValid2;
+          }
+          break;
+        case 'max':
+          const isNotValid3 = (option.max) ? (this.data[option.name] > option.max) : false;
           this.updateValidators(option, validationType, isNotValid3);
           return isNotValid3;
           break;
@@ -144,6 +174,7 @@ export interface DynamicFormOption {
   offsetMd: ColSize;
   offsetSm: ColSize;
   offsetXs: ColSize;
+  pattern?: string;
   desc?: string;
   min?: any;
   max?: any;

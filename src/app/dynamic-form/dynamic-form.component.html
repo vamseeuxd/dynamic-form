@@ -33,11 +33,37 @@
             </small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'maxlength')">
-              Provide Maximum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.max}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">
               Provide valid Pattern for {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* Number ************************************* -->
+       <span *ngSwitchCase="'number'">
+           <input [(ngModel)]="data[option.name]"
+                  [max]="option.max"
+                  [min]="option.min"
+                  [name]="option.name"
+                  [placeholder]="'Enter '+option.label"
+                  [required]="option.required"
+                  class="form-control"
+                  type="number">
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'required')"
+                   class="form-text text-danger">
+              Provide {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'min')"
+                   class="form-text text-danger">
+              {{option.label}} should be more than {{option.min}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'max')"
+                   class="form-text text-danger">
+              {{option.label}} should be less than {{option.max}}
             </small>
        </span>
 
@@ -59,11 +85,11 @@
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'min')"
                    class="form-text text-danger">
-              Date should be more than {{option.min|date:'dd-MMM-yyyy'}}
+              {{option.label}} should be more than {{option.min|date:'dd-MMM-yyyy'}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'max')"
                    class="form-text text-danger">
-              Date should be less than {{option.max|date:'dd-MMM-yyyy'}}
+              {{option.label}} should be less than {{option.max|date:'dd-MMM-yyyy'}}
             </small>
        </span>
 
@@ -92,7 +118,7 @@
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
                    class="form-text text-danger">
-              Provide Maximum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.max}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">
@@ -123,7 +149,7 @@
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
                    class="form-text text-danger">
-              Provide Maximum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.max}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">

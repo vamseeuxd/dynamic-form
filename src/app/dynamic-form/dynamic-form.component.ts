@@ -143,7 +143,7 @@ export class DynamicFormComponent implements OnInit {
   ];
 
   data = {
-    checkbox: ['value2'],
+    checkbox: [],
     gender: 'female'
   };
 

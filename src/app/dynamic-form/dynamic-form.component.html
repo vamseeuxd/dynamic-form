@@ -21,7 +21,8 @@
                   [minlength]="option.min"
                   [maxlength]="option.max"
                   [placeholder]="'Enter '+option.label">
-            <small class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
@@ -52,7 +53,8 @@
                       type="range">
             </div>
 
-            <small class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
             <small *ngIf="isValidationError(dynamicForm, option, 'required')"
                    class="form-text text-danger">
               Please Provide {{option.label}}
@@ -82,7 +84,8 @@
                   [minlength]="option.min"
                   [pattern]="option?.pattern"
                   [placeholder]="'Enter '+option.label">
-            <small class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
@@ -110,7 +113,8 @@
                   [name]="option.name"
                   class="form-control"
                   [placeholder]="'Enter '+option.label">
-            <small class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide valid {{option.label}}
@@ -153,7 +157,8 @@
                     [id]="subOption['id']"
                     [value]="subOption.value"> {{subOption.label}} </option>
           </select>
-          <small class="form-text text-muted">{{option.desc}}</small>
+          <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                 class="form-text text-muted">{{option.desc}}</small>
           <small *ngIf="isValidationError(dynamicForm, option, 'required')"
                  class="form-text text-danger">
             Please Provide {{option.label}}

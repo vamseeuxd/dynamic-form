@@ -60,9 +60,33 @@ export class DynamicFormComponent implements OnInit {
         },
       ],
     },
+    {
+      desc: 'Checkbox Example',
+      required: true,
+      type: 'checkbox',
+      label: 'Gender',
+      name: 'checkbox',
+      size: '4',
+      min: 3,
+      max: 10,
+      dataProvider: [
+        {
+          id: 'checkbox_1',
+          label: 'Value 1',
+          value: 'value1',
+        },
+        {
+          id: 'checkbox_2',
+          label: 'Value 2',
+          value: 'value2',
+        },
+      ],
+    },
   ];
 
-  data = {};
+  data = {
+    checkbox: ['value2'],
+  };
 
   constructor() {
   }
@@ -72,5 +96,22 @@ export class DynamicFormComponent implements OnInit {
 
   onFormSubmit(dynamicForm) {
     // console.log(dynamicForm);
+  }
+
+  onCheckboxValueChange(selectedList: any[], value: any, $event) {
+    console.log($event.target.checked);
+    if ($event.target.checked) {
+      selectedList.push(value);
+    } else {
+      for (let i = selectedList.length - 1; i >= 0; i--) {
+        if (selectedList[i] === value) {
+          selectedList.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  isCheckboxSelected(selectedList: any[], value: any): boolean {
+    return selectedList ? (selectedList.indexOf(value) >= 0) : false;
   }
 }

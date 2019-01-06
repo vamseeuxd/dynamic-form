@@ -15,6 +15,7 @@ export class DynamicFormComponent implements OnInit {
   get isValid(): boolean {
     return this._isValid;
   }
+
   @Input() data = {};
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -119,6 +120,20 @@ export class DynamicFormComponent implements OnInit {
   private isCheckboxSelected(selectedList: any[], value: any): boolean {
     return selectedList ? (selectedList.indexOf(value) >= 0) : false;
   }
+
+  getResponsiveClassName(option: DynamicFormOption): string {
+    return 'mt-3' +
+      ' col-xl-' + option.sizeXl +
+      ' col-lg-' + option.sizeLg +
+      ' col-md-' + option.sizeMd +
+      ' col-sm-' + option.sizeSm +
+      ' col-xs-' + option.sizeXs +
+      ' offset-xl-' + option.offsetXl +
+      ' offset-lg-' + option.offsetLg +
+      ' offset-md-' + option.offsetMd +
+      ' offset-sm-' + option.offsetSm +
+      ' offset-xs-' + option.offsetXs;
+  }
 }
 
 export interface DynamicFormOption {
@@ -131,6 +146,11 @@ export interface DynamicFormOption {
   sizeMd: ColSize;
   sizeSm: ColSize;
   sizeXs: ColSize;
+  offsetXl: ColSize;
+  offsetLg: ColSize;
+  offsetMd: ColSize;
+  offsetSm: ColSize;
+  offsetXs: ColSize;
   desc?: string;
   min?: any;
   max?: any;
@@ -138,16 +158,17 @@ export interface DynamicFormOption {
 }
 
 export enum ColSize {
-  col1 = '1',
-  col2 = '2',
-  col3 = '3',
-  col4 = '4',
-  col5 = '5',
-  col6 = '6',
-  col7 = '7',
-  col8 = '8',
-  col9 = '9',
-  col10 = '10',
-  col11 = '11',
-  col12 = '12',
+  col_0 = '0',
+  col_1 = '1',
+  col_2 = '2',
+  col_3 = '3',
+  col_4 = '4',
+  col_5 = '5',
+  col_6 = '6',
+  col_7 = '7',
+  col_8 = '8',
+  col_9 = '9',
+  col_10 = '10',
+  col_11 = '11',
+  col_12 = '12',
 }

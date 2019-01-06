@@ -17,21 +17,26 @@
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
                   class="form-control"
+                  [pattern]="option?.pattern"
                   [minlength]="option.min"
                   [maxlength]="option.max"
                   [placeholder]="'Enter '+option.label">
             <small class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+                   *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
             </small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.minlength && !dynamicForm.controls[option.name].pristine">
+                   *ngIf="isValidationError(dynamicForm, option, 'minlength')">
               Please Provide Minimum {{option.min}} charters for {{option.label}}
             </small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.maxlength && !dynamicForm.controls[option.name].pristine">
+                   *ngIf="isValidationError(dynamicForm, option, 'maxlength')">
               Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
+                   class="form-text text-danger">
+              Please Provide Pattern for {{option.label}}
             </small>
        </span>
 
@@ -42,17 +47,33 @@
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
                   class="form-control"
+                  [maxlength]="option.max"
+                  [minlength]="option.min"
+                  [pattern]="option?.pattern"
                   [placeholder]="'Enter '+option.label">
             <small class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+                   *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'minlength')"
+                   class="form-text text-danger">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
+                   class="form-text text-danger">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
+                   class="form-text text-danger">
+              Please Provide Pattern for {{option.label}}
             </small>
        </span>
 
-        <!--  ************************************* Password ************************************* -->
+        <!--  ************************************* Email ************************************* -->
        <span *ngSwitchCase="'email'">
            <input type="email"
+                  email
                   [required]="option.required"
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
@@ -60,8 +81,12 @@
                   [placeholder]="'Enter '+option.label">
             <small class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
-              Please Provide {{option.label}}
+                   *ngIf="isValidationError(dynamicForm, option, 'required')">
+              Please Provide valid {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'email')"
+                   class="form-text text-danger">
+              Please Provide valid {{option.label}}
             </small>
        </span>
 
@@ -83,7 +108,7 @@
             </div>
             <small class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
-                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+                   *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
             </small>
        </div>
@@ -106,9 +131,19 @@
             </div>
             <small class="form-text text-muted">{{option.desc}}</small>
             <small
-              *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine"
+              *ngIf="isValidationError(dynamicForm, option, 'required')"
               class="form-text text-danger">
               Please Provide {{option.label}}
+            </small>
+            <small
+              *ngIf="isValidationError(dynamicForm, option, 'min')"
+              class="form-text text-danger">
+              Please select minimum {{option.min}} options for {{option.label}}
+            </small>
+            <small
+              *ngIf="isValidationError(dynamicForm, option, 'max')"
+              class="form-text text-danger">
+              Please select maximum {{option.max}} options for {{option.label}}
             </small>
        </div>
 

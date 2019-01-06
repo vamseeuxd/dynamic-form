@@ -62,13 +62,13 @@ export class DynamicFormComponent implements OnInit {
     },
     {
       desc: 'Checkbox Example',
-      required: true,
+      required: false,
       type: 'checkbox',
       label: 'Gender',
       name: 'checkbox',
       size: '4',
-      min: 3,
-      max: 10,
+      min: 2,
+      max: 4,
       dataProvider: [
         {
           id: 'checkbox_1',
@@ -80,12 +80,28 @@ export class DynamicFormComponent implements OnInit {
           label: 'Value 2',
           value: 'value2',
         },
+        {
+          id: 'checkbox_3',
+          label: 'Value 3',
+          value: 'value3',
+        },
+        {
+          id: 'checkbox_4',
+          label: 'Value 4',
+          value: 'value4',
+        },
+        {
+          id: 'checkbox_5',
+          label: 'Value 5',
+          value: 'value5',
+        },
       ],
     },
   ];
 
   data = {
     checkbox: ['value2'],
+    gender: 'female'
   };
 
   constructor() {
@@ -94,12 +110,34 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  isValidationError(_form, option, validationType): boolean {
+    if (option.type === 'checkbox') {
+      switch (validationType) {
+        case 'required':
+          return option.required ? this.data[option.name].length <= 0 : false;
+          break;
+        case 'min':
+          return (this.data[option.name].length > 0 && option.min) ? this.data[option.name].length < option.min : false;
+          break;
+        case 'max':
+          return (this.data[option.name].length > 0 && option.max) ? this.data[option.name].length > option.max : false;
+          break;
+      }
+    } else {
+      return (
+        _form.controls[option.name] &&
+        _form.controls[option.name].errors &&
+        _form.controls[option.name].errors[validationType] &&
+        !_form.controls[option.name].pristine
+      );
+    }
+  }
+
   onFormSubmit(dynamicForm) {
     // console.log(dynamicForm);
   }
 
   onCheckboxValueChange(selectedList: any[], value: any, $event) {
-    console.log($event.target.checked);
     if ($event.target.checked) {
       selectedList.push(value);
     } else {

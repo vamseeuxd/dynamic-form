@@ -1,3 +1,4 @@
 <div class="container-fluid">
-  <ngx-dynamic-form></ngx-dynamic-form>
+  <ngx-dynamic-form [(data)]="data" [options]="options"></ngx-dynamic-form>
+  <pre>{{data|json}}</pre>
 </div>

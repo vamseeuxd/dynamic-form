@@ -1,7 +1,7 @@
 <form #dynamicForm="ngForm" novalidate>
   <!--develop Created-->
 
-  <div class="form-row">
+  <div (change)="dataChange.emit(data)" class="form-row">
 
     <!--  'mt-3 col-xl-' + option.sizeXl + '  col-lg-' + option.sizeLg + '  col-md-' + option.sizeMd + '  col-sm-' + option.sizeSm + '  col-xs-' + option.sizeXs  -->
     <div *ngFor="let option of options"
@@ -229,7 +229,6 @@
 
       </span>
 
-
     </div>
 
   </div>
@@ -237,5 +236,3 @@
   <button class="btn btn-primary" [disabled]="dynamicForm.invalid" (click)="onFormSubmit(dynamicForm)">Save</button>
 
 </form>
-
-<pre>{{data|json}}</pre>

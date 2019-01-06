@@ -40,6 +40,37 @@
             </small>
        </span>
 
+        <!--  ************************************* Range ************************************* -->
+       <span *ngSwitchCase="'range'">
+            <div class="form-control"
+                 style="background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
+               <input [(ngModel)]="data[option.name]"
+                      [max]="option.max"
+                      [min]="option.min"
+                      [name]="option.name"
+                      class="form-control-range"
+                      type="range">
+            </div>
+
+            <small class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'required')"
+                   class="form-text text-danger">
+              Please Provide {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'minlength')"
+                   class="form-text text-danger">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
+                   class="form-text text-danger">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
+                   class="form-text text-danger">
+              Please Provide Pattern for {{option.label}}
+            </small>
+       </span>
+
         <!--  ************************************* Password ************************************* -->
        <span *ngSwitchCase="'password'">
            <input type="password"

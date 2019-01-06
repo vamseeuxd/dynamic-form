@@ -19,6 +19,16 @@ export class DynamicFormComponent implements OnInit {
       max: 10,
     },
     {
+      desc: 'Range Input',
+      required: true,
+      type: 'range',
+      label: 'Range Input',
+      name: 'rangeInput',
+      size: '4',
+      min: 3,
+      max: 10,
+    },
+    {
       desc: 'Password',
       required: true,
       type: 'password',

@@ -1,4 +1,4 @@
 <div class="container-fluid">
-  <ngx-dynamic-form [(data)]="data" [options]="options"></ngx-dynamic-form>
-  <pre>{{data|json}}</pre>
+  <ngx-dynamic-form [(data)]="data" [(isValid)]="isValid" [options]="options"></ngx-dynamic-form>
+  <button [disabled]="!isValid" class="btn btn-primary">Save</button>
 </div>

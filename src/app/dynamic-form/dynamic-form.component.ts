@@ -6,63 +6,105 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./dynamic-form.component.scss'],
 })
 export class DynamicFormComponent implements OnInit {
+  @Output() isValidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() options: DynamicFormOption[] = [];
+  public validators = {};
 
-  @Input() options = [];
+  private _isValid: boolean;
 
+  get isValid(): boolean {
+    return this._isValid;
+  }
   @Input() data = {};
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  @Input()
+  set isValid(value: boolean) {
+    // this._isValid = value;
   }
 
-  ngOnInit() {
+  formDataChange() {
+    this.dataChange.emit(this.data);
   }
 
-  isValidationError(_form, option, validationType): boolean {
+  ngOnInit(): void {
+    setTimeout(() => {
+      this._isValid = Object.keys(this.validators).length <= 0;
+      this.isValidChange.emit(this._isValid);
+    });
+  }
+
+  private isValidationError(_form, option, validationType): boolean {
     if (option.type === 'checkbox') {
       switch (validationType) {
         case 'required':
-          return option.required ? this.data[option.name].length <= 0 : false;
+          const isNotValid0 = option.required ? this.data[option.name].length <= 0 : false;
+          this.updateValidators(option, validationType, isNotValid0);
+          return isNotValid0;
           break;
         case 'min':
-          return (this.data[option.name].length > 0 && option.min) ? this.data[option.name].length < option.min : false;
+          const isNotValid1 = (this.data[option.name].length > 0 && option.min) ? this.data[option.name].length < option.min : false;
+          this.updateValidators(option, validationType, isNotValid1);
+          return isNotValid1;
           break;
         case 'max':
-          return (this.data[option.name].length > 0 && option.max) ? this.data[option.name].length > option.max : false;
+          const isNotValid2 = (this.data[option.name].length > 0 && option.max) ? this.data[option.name].length > option.max : false;
+          this.updateValidators(option, validationType, isNotValid2);
+          return isNotValid2;
           break;
       }
     } else if (option.type === 'date') {
       switch (validationType) {
         case 'required':
-          return (
+          const isNotValid1 = (
             _form.controls[option.name] &&
             _form.controls[option.name].errors &&
-            _form.controls[option.name].errors[validationType] &&
-            !_form.controls[option.name].pristine
+            _form.controls[option.name].errors[validationType]
           );
+          this.updateValidators(option, validationType, isNotValid1);
+          return isNotValid1 && !_form.controls[option.name].pristine;
           break;
         case 'min':
-          return (option.max) ? new Date(this.data[option.name]) < new Date(option.min) : false;
+          const isNotValid2 = (option.max) ? new Date(this.data[option.name]) < new Date(option.min) : false;
+          this.updateValidators(option, validationType, isNotValid2);
+          return isNotValid2;
           break;
         case 'max':
-          return (option.min) ? new Date(this.data[option.name]) > new Date(option.max) : false;
+          const isNotValid3 = (option.min) ? new Date(this.data[option.name]) > new Date(option.max) : false;
+          this.updateValidators(option, validationType, isNotValid3);
+          return isNotValid3;
           break;
       }
     } else {
-      return (
+      const isNotValid = (
         _form.controls[option.name] &&
         _form.controls[option.name].errors &&
-        _form.controls[option.name].errors[validationType] &&
-        !_form.controls[option.name].pristine
+        _form.controls[option.name].errors[validationType]
       );
+      this.updateValidators(option, validationType, isNotValid);
+      return isNotValid && !_form.controls[option.name].pristine;
     }
   }
 
-  onFormSubmit(dynamicForm) {
-    // console.log(dynamicForm);
+  private updateValidators(option, validationType, isNotValid) {
+    if (!this.validators[option.name]) {
+      this.validators[option.name] = {};
+    }
+    if (isNotValid) {
+      this.validators[option.name][validationType] = isNotValid;
+    } else {
+      delete this.validators[option.name][validationType];
+    }
+    if (Object.keys(this.validators[option.name]).length === 0) {
+      delete this.validators[option.name];
+    }
+    setTimeout(() => {
+      this._isValid = Object.keys(this.validators).length <= 0;
+      this.isValidChange.emit(this._isValid);
+    });
   }
 
-  onCheckboxValueChange(selectedList: any[], value: any, $event) {
+  private onCheckboxValueChange(selectedList: any[], value: any, $event) {
     if ($event.target.checked) {
       selectedList.push(value);
     } else {
@@ -74,7 +116,38 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
-  isCheckboxSelected(selectedList: any[], value: any): boolean {
+  private isCheckboxSelected(selectedList: any[], value: any): boolean {
     return selectedList ? (selectedList.indexOf(value) >= 0) : false;
   }
+}
+
+export interface DynamicFormOption {
+  required: boolean;
+  type: string;
+  label: string;
+  name: string;
+  sizeXl: ColSize;
+  sizeLg: ColSize;
+  sizeMd: ColSize;
+  sizeSm: ColSize;
+  sizeXs: ColSize;
+  desc?: string;
+  min?: any;
+  max?: any;
+  dataProvider?: { id: string, label: string, value: any }[];
+}
+
+export enum ColSize {
+  col1 = '1',
+  col2 = '2',
+  col3 = '3',
+  col4 = '4',
+  col5 = '5',
+  col6 = '6',
+  col7 = '7',
+  col8 = '8',
+  col9 = '9',
+  col10 = '10',
+  col11 = '11',
+  col12 = '12',
 }

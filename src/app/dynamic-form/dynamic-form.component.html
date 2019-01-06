@@ -1,0 +1,102 @@
+<form #dynamicForm="ngForm" novalidate>
+
+
+  <div class="form-row">
+
+    <div [class]="'col-'+option.size" *ngFor="let option of options">
+      <!--Common-->
+      <label>{{option.label}}</label>
+
+      <!--Dynamic-->
+      <span [ngSwitch]="option.type">
+
+        <!--  ************************************* Text ************************************* -->
+       <span *ngSwitchCase="'text'">
+           <input type="text"
+                  [required]="option.required"
+                  [(ngModel)]="data[option.name]"
+                  [name]="option.name"
+                  class="form-control"
+                  [minlength]="option.min"
+                  [maxlength]="option.max"
+                  [placeholder]="'Enter '+option.label">
+            <small class="form-text text-muted">{{option.desc}}</small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+              Please Provide {{option.label}}
+            </small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.minlength && !dynamicForm.controls[option.name].pristine">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.maxlength && !dynamicForm.controls[option.name].pristine">
+              Please Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* Password ************************************* -->
+       <span *ngSwitchCase="'password'">
+           <input type="password"
+                  [required]="option.required"
+                  [(ngModel)]="data[option.name]"
+                  [name]="option.name"
+                  class="form-control"
+                  [placeholder]="'Enter '+option.label">
+            <small class="form-text text-muted">{{option.desc}}</small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+              Please Provide {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* Password ************************************* -->
+       <span *ngSwitchCase="'email'">
+           <input type="email"
+                  [required]="option.required"
+                  [(ngModel)]="data[option.name]"
+                  [name]="option.name"
+                  class="form-control"
+                  [placeholder]="'Enter '+option.label">
+            <small class="form-text text-muted">{{option.desc}}</small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+              Please Provide {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* Radio ************************************* -->
+        <div *ngSwitchCase="'radio'">
+            <div class="form-control"
+                 style="background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
+              <div class="custom-control custom-radio custom-control-inline d-inline"
+                   *ngFor="let subOption of option.dataProvider">
+                  <input [(ngModel)]="data[option.name]"
+                         [name]="option.name"
+                         type="radio"
+                         [value]="subOption['value']"
+                         class="custom-control-input"
+                         [id]="subOption['id']">
+                  <label class="custom-control-label"
+                         [for]="subOption['id']">{{subOption['label']}}</label>
+              </div>
+            </div>
+            <small class="form-text text-muted">{{option.desc}}</small>
+            <small class="form-text text-danger"
+                   *ngIf="dynamicForm.controls[option.name]?.errors?.required && !dynamicForm.controls[option.name].pristine">
+              Please Provide {{option.label}}
+            </small>
+       </div>
+
+      </span>
+
+
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary" [disabled]="dynamicForm.invalid" (click)="onFormSubmit(dynamicForm)">Save</button>
+
+</form>
+
+<pre>{{data|json}}</pre>

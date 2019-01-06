@@ -223,7 +223,6 @@ export class AppComponent {
       ],
     },
   ];
-  isValid = false;
   data = {
     checkbox: [],
     gender: ''

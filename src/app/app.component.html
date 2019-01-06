@@ -1,4 +1,6 @@
 <div class="container-fluid">
-  <ngx-dynamic-form [(data)]="data" [(isValid)]="isValid" [options]="options"></ngx-dynamic-form>
-  <button [disabled]="!isValid" class="btn btn-primary">Save</button>
+  <ngx-dynamic-form #test [(data)]="data" [options]="options"></ngx-dynamic-form>
+  <button [disabled]="!test.isValid" class="btn btn-primary">Save</button>
+  <h6>{{test.isValid}}</h6>
+  <pre>{{test.validators|json}}</pre>
 </div>

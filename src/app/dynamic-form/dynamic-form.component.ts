@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'ngx-dynamic-form',
@@ -10,18 +10,15 @@ export class DynamicFormComponent implements OnInit {
   @Input() options: DynamicFormOption[] = [];
   public validators = {};
 
-  private _isValid: boolean;
-
-  get isValid(): boolean {
-    return this._isValid;
+  constructor(private cdRef: ChangeDetectorRef) {
   }
 
   @Input() data = {};
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input()
-  set isValid(value: boolean) {
-    // this._isValid = value;
+  public get isValid(): boolean {
+    this.cdRef.detectChanges();
+    return Object.keys(this.validators).length <= 0;
   }
 
   formDataChange() {
@@ -30,12 +27,12 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this._isValid = Object.keys(this.validators).length <= 0;
-      this.isValidChange.emit(this._isValid);
-    });
+      this.isValidChange.emit(Object.keys(this.validators).length <= 0);
+    }, 5);
   }
 
   private isValidationError(_form, option, validationType): boolean {
+    // console.log(option.type);
     if (option.type === 'checkbox') {
       switch (validationType) {
         case 'required':
@@ -99,10 +96,6 @@ export class DynamicFormComponent implements OnInit {
     if (Object.keys(this.validators[option.name]).length === 0) {
       delete this.validators[option.name];
     }
-    setTimeout(() => {
-      this._isValid = Object.keys(this.validators).length <= 0;
-      this.isValidChange.emit(this._isValid);
-    });
   }
 
   private onCheckboxValueChange(selectedList: any[], value: any, $event) {

@@ -19,6 +19,16 @@ export class DynamicFormComponent implements OnInit {
       max: 10,
     },
     {
+      desc: 'Date Please',
+      required: true,
+      type: 'date',
+      label: 'Date Please',
+      name: 'datePlease',
+      size: '4',
+      min: '2019-03-01',
+      max: '2019-05-31',
+    },
+    {
       desc: 'Range Input',
       required: true,
       type: 'range',
@@ -164,6 +174,23 @@ export class DynamicFormComponent implements OnInit {
           break;
         case 'max':
           return (this.data[option.name].length > 0 && option.max) ? this.data[option.name].length > option.max : false;
+          break;
+      }
+    } else if (option.type === 'date') {
+      switch (validationType) {
+        case 'required':
+          return (
+            _form.controls[option.name] &&
+            _form.controls[option.name].errors &&
+            _form.controls[option.name].errors[validationType] &&
+            !_form.controls[option.name].pristine
+          );
+          break;
+        case 'min':
+          return (option.max) ? new Date(this.data[option.name]) < new Date(option.min) : false;
+          break;
+        case 'max':
+          return (option.min) ? new Date(this.data[option.name]) > new Date(option.max) : false;
           break;
       }
     } else {

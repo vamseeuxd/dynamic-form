@@ -25,19 +25,45 @@
                    class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
-              Please Provide {{option.label}}
+              Provide valid {{option.label}}
             </small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'minlength')">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Minimum {{option.min}} charters for {{option.label}}
             </small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'maxlength')">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.min}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">
-              Please Provide Pattern for {{option.label}}
+              Provide valid Pattern for {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* Date ************************************* -->
+       <span *ngSwitchCase="'date'">
+           <input [(ngModel)]="data[option.name]"
+                  [max]="option.max"
+                  [min]="option.min"
+                  [name]="option.name"
+                  [placeholder]="'Enter '+option.label"
+                  [required]="option.required"
+                  class="form-control"
+                  type="date">
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'required')"
+                   class="form-text text-danger">
+              Provide {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'min')"
+                   class="form-text text-danger">
+              Date should be more than {{option.min|date:'dd-MMM-yyyy'}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'max')"
+                   class="form-text text-danger">
+              Date should be less than {{option.max|date:'dd-MMM-yyyy'}}
             </small>
        </span>
 
@@ -57,19 +83,19 @@
                    class="form-text text-muted">{{option.desc}}</small>
             <small *ngIf="isValidationError(dynamicForm, option, 'required')"
                    class="form-text text-danger">
-              Please Provide {{option.label}}
+              Provide {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'minlength')"
                    class="form-text text-danger">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Minimum {{option.min}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
                    class="form-text text-danger">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.min}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">
-              Please Provide Pattern for {{option.label}}
+              Provide valid Pattern for {{option.label}}
             </small>
        </span>
 
@@ -88,19 +114,19 @@
                    class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
-              Please Provide {{option.label}}
+              Provide {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'minlength')"
                    class="form-text text-danger">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Minimum {{option.min}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
                    class="form-text text-danger">
-              Please Provide Minimum {{option.min}} charters for {{option.label}}
+              Provide Maximum {{option.min}} charters for {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'pattern')"
                    class="form-text text-danger">
-              Please Provide Pattern for {{option.label}}
+              Provide valid Pattern for {{option.label}}
             </small>
        </span>
 
@@ -117,11 +143,11 @@
                    class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
-              Please Provide valid {{option.label}}
+              Provide valid {{option.label}}
             </small>
             <small *ngIf="isValidationError(dynamicForm, option, 'email')"
                    class="form-text text-danger">
-              Please Provide valid {{option.label}}
+              Provide valid {{option.label}}
             </small>
        </span>
 
@@ -144,7 +170,7 @@
             <small class="form-text text-muted">{{option.desc}}</small>
             <small class="form-text text-danger"
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
-              Please Provide {{option.label}}
+              Provide {{option.label}}
             </small>
        </div>
 
@@ -161,7 +187,7 @@
                  class="form-text text-muted">{{option.desc}}</small>
           <small *ngIf="isValidationError(dynamicForm, option, 'required')"
                  class="form-text text-danger">
-            Please Provide {{option.label}}
+            Provide {{option.label}}
           </small>
        </div>
 
@@ -185,7 +211,7 @@
             <small
               *ngIf="isValidationError(dynamicForm, option, 'required')"
               class="form-text text-danger">
-              Please Provide {{option.label}}
+              Provide {{option.label}}
             </small>
             <small
               *ngIf="isValidationError(dynamicForm, option, 'min')"

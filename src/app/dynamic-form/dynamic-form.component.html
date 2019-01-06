@@ -3,9 +3,9 @@
 
   <div class="form-row">
 
-    <div [class]="'col-'+option.size" *ngFor="let option of options">
+    <div *ngFor="let option of options" [class]="'mt-3 col-'+option.size">
       <!--Common-->
-      <label>{{option.label}}</label>
+      <label class="font-weight-bold">{{option.label}}</label>
 
       <!--Dynamic-->
       <span [ngSwitch]="option.type">
@@ -111,6 +111,22 @@
                    *ngIf="isValidationError(dynamicForm, option, 'required')">
               Please Provide {{option.label}}
             </small>
+       </div>
+
+        <!--  ************************************* select ************************************* -->
+        <div *ngSwitchCase="'select'">
+          <select [(ngModel)]="data[option.name]"
+                  [name]="option.name"
+                  class="form-control">
+            <option *ngFor="let subOption of option.dataProvider"
+                    [id]="subOption['id']"
+                    [value]="subOption.value"> {{subOption.label}} </option>
+          </select>
+          <small class="form-text text-muted">{{option.desc}}</small>
+          <small *ngIf="isValidationError(dynamicForm, option, 'required')"
+                 class="form-text text-danger">
+            Please Provide {{option.label}}
+          </small>
        </div>
 
         <!--  ************************************* Checkbox ************************************* -->

@@ -61,6 +61,39 @@ export class DynamicFormComponent implements OnInit {
       ],
     },
     {
+      desc: 'City',
+      required: true,
+      type: 'select',
+      label: 'City',
+      name: 'city',
+      size: '4',
+      min: 0,
+      max: 0,
+      dataProvider: [
+        {
+          id: 'city1',
+          label: 'City 1',
+          value: 'city1',
+        }, {
+          id: 'city2',
+          label: 'City 2',
+          value: 'city2',
+        }, {
+          id: 'city3',
+          label: 'City 3',
+          value: 'city3',
+        }, {
+          id: 'city4',
+          label: 'City 4',
+          value: 'city4',
+        }, {
+          id: 'city5',
+          label: 'City 5',
+          value: 'city5',
+        },
+      ],
+    },
+    {
       desc: 'Checkbox Example',
       required: false,
       type: 'checkbox',

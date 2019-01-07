@@ -5,7 +5,8 @@
     <div *ngFor="let option of getOptionsToShow(options)"
          [class]="getResponsiveClassName(option)">
       <!--Common-->
-      <label class="font-weight-bold">{{option.label}}</label>
+      <label class="font-weight-bold">{{option.label}} <span *ngIf="option.required"
+                                                             class="text-danger">*</span></label>
 
       <!--Dynamic-->
       <span [ngSwitch]="option.type">
@@ -188,16 +189,16 @@
             <div class="form-control form-controller-bg">
               <div class="form-check form-check-inline"
                    *ngFor="let subOption of option.dataProvider">
-                  <input [(ngModel)]="data[option.name]"
-                         [disabled]="option.disabled"
-                         [name]="option.name"
-                         [required]="option.required"
-                         type="radio"
-                         [value]="subOption['value']"
-                         class="form-check-input"
-                         [id]="subOption['id']">
-                  <label class="form-check-label"
-                         [for]="subOption['id']">{{subOption['label']}}</label>
+                  <label class="form-check-label">
+                    <input [(ngModel)]="data[option.name]"
+                           [disabled]="option.disabled"
+                           [name]="option.name"
+                           [required]="option.required"
+                           [value]="subOption['value']"
+                           class="form-check-input"
+                           type="radio">
+                    {{subOption['label']}}
+                  </label>
               </div>
             </div>
             <small class="form-text text-muted">{{option.desc}}</small>
@@ -215,7 +216,6 @@
                   [name]="option.name"
                   class="form-control">
             <option *ngFor="let subOption of option.dataProvider"
-                    [id]="subOption['id']"
                     [value]="subOption.value"> {{subOption.label}} </option>
           </select>
           <small *ngIf="dynamicForm.controls[option.name]?.pristine"
@@ -231,15 +231,15 @@
             <div class="form-control form-controller-bg">
               <div *ngFor="let subOption of option.dataProvider"
                    class="form-check form-check-inline">
-                  <input (change)="onCheckboxValueChange(data[option.name],subOption['value'],$event)"
-                         [checked]="isCheckboxSelected(data[option.name],subOption['value'])"
-                         [id]="subOption['id']"
-                         [disabled]="option.disabled"
-                         [name]="option.name"
-                         class="form-check-input"
-                         type="checkbox">
-                  <label [for]="subOption['id']"
-                         class="form-check-label">{{subOption['label']}}</label>
+                  <label class="form-check-label">
+                    <input (change)="onCheckboxValueChange(data[option.name],subOption['value'],$event)"
+                           [checked]="isCheckboxSelected(data[option.name],subOption['value'])"
+                           [disabled]="option.disabled"
+                           [name]="option.name"
+                           class="form-check-input"
+                           type="checkbox">
+                    {{subOption['label']}}
+                  </label>
               </div>
             </div>
             <small class="form-text text-muted">{{option.desc}}</small>

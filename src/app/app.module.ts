@@ -6,11 +6,13 @@ import {AppComponent} from './app.component';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DynamicFormGeneratorComponent} from './dynamic-form-generator/dynamic-form-generator.component';
 
 @NgModule({
   declarations: [
     DynamicFormComponent,
     AppComponent,
+    DynamicFormGeneratorComponent,
   ],
   imports: [
     CommonModule,

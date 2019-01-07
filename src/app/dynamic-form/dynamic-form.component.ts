@@ -114,7 +114,7 @@ export class DynamicFormComponent implements OnInit {
     }
   }
 
-  private updateValidators(option, validationType, isNotValid) {
+  private updateValidators(option: DynamicFormOption, validationType, isNotValid) {
     if (!this.validators[option.name]) {
       this.validators[option.name] = {};
     }
@@ -124,6 +124,9 @@ export class DynamicFormComponent implements OnInit {
       delete this.validators[option.name][validationType];
     }
     if (Object.keys(this.validators[option.name]).length === 0) {
+      delete this.validators[option.name];
+    }
+    if (!option.required) {
       delete this.validators[option.name];
     }
   }

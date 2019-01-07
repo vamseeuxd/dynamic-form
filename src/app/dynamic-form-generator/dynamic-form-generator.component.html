@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header font-weight-bold">
+    Dynamic Form Generator - Add New Form Controller
+  </div>
+  <div class="card-body">
+    <ngx-dynamic-form #test (dataChange)="onDateChange($event)" [(data)]="data" [options]="options"></ngx-dynamic-form>
+    <hr>
+    <div class="row">
+      <div class="col-2">
+        <button (click)="addFormClick()" [disabled]="!test.isValid" class="btn-primary btn btn-block">Add Form
+          Controller
+        </button>
+      </div>
+      <div class="col-2">
+        <button (click)="cancel.emit(null)" class="btn-dark btn btn-block">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

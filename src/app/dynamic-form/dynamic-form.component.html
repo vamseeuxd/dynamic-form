@@ -98,8 +98,7 @@
 
         <!--  ************************************* Range ************************************* -->
        <span *ngSwitchCase="'range'">
-            <div class="form-control"
-                 style="background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
+            <div class="form-control form-controller-bg">
                <input [(ngModel)]="data[option.name]"
                       [disabled]="option.disabled"
                       [required]="option.required"
@@ -186,8 +185,7 @@
 
         <!--  ************************************* Radio ************************************* -->
         <div *ngSwitchCase="'radio'">
-            <div class="form-control"
-                 style="height: auto;background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
+            <div class="form-control form-controller-bg">
               <div class="form-check form-check-inline"
                    *ngFor="let subOption of option.dataProvider">
                   <input [(ngModel)]="data[option.name]"
@@ -230,8 +228,7 @@
 
         <!--  ************************************* Checkbox ************************************* -->
         <div *ngSwitchCase="'checkbox'">
-            <div class="form-control"
-                 style="height: auto;background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
+            <div class="form-control form-controller-bg">
               <div *ngFor="let subOption of option.dataProvider"
                    class="form-check form-check-inline">
                   <input (change)="onCheckboxValueChange(data[option.name],subOption['value'],$event)"

@@ -11,6 +11,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'text',
       label: 'First Name',
       name: 'firstName',
@@ -30,6 +32,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'number',
       label: 'Number Test',
       name: 'numberTest',
@@ -49,6 +53,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'date',
       label: 'Date Please',
       name: 'datePlease',
@@ -68,6 +74,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'range',
       label: 'Range Input',
       name: 'rangeInput',
@@ -87,6 +95,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'password',
       label: 'Password',
       name: 'password',
@@ -106,6 +116,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'email',
       label: 'Email',
       name: 'email',
@@ -125,6 +137,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'radio',
       label: 'Gender',
       name: 'gender',
@@ -156,6 +170,8 @@ export class AppComponent {
     {
       desc: '',
       required: true,
+      disabled: false,
+      hide: false,
       type: 'select',
       label: 'City',
       name: 'city',
@@ -198,6 +214,8 @@ export class AppComponent {
     {
       desc: '',
       required: false,
+      disabled: false,
+      hide: false,
       type: 'checkbox',
       label: 'Gender',
       name: 'checkbox',

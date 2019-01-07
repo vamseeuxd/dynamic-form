@@ -157,10 +157,16 @@ export class DynamicFormComponent implements OnInit {
       ' offset-sm-' + option.offsetSm +
       ' offset-xs-' + option.offsetXs;
   }
+
+  getOptionsToShow(options: DynamicFormOption[]): DynamicFormOption[] {
+    return options.filter(option => !option.hide);
+  }
 }
 
 export interface DynamicFormOption {
   required: boolean;
+  disabled?: boolean;
+  hide?: boolean;
   type: string;
   label: string;
   name: string;

@@ -2,7 +2,7 @@
 
   <div class="form-row">
 
-    <div *ngFor="let option of options"
+    <div *ngFor="let option of getOptionsToShow(options)"
          [class]="getResponsiveClassName(option)">
       <!--Common-->
       <label class="font-weight-bold">{{option.label}}</label>
@@ -13,6 +13,7 @@
         <!--  ************************************* Text ************************************* -->
        <span *ngSwitchCase="'text'">
            <input type="text"
+                  [disabled]="option.disabled"
                   [required]="option.required"
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
@@ -44,6 +45,7 @@
         <!--  ************************************* Number ************************************* -->
        <span *ngSwitchCase="'number'">
            <input [(ngModel)]="data[option.name]"
+                  [disabled]="option.disabled"
                   [max]="option.max"
                   [min]="option.min"
                   [name]="option.name"
@@ -70,6 +72,7 @@
         <!--  ************************************* Date ************************************* -->
        <span *ngSwitchCase="'date'">
            <input [(ngModel)]="data[option.name]"
+                  [disabled]="option.disabled"
                   [max]="option.max"
                   [min]="option.min"
                   [name]="option.name"
@@ -98,6 +101,7 @@
             <div class="form-control"
                  style="background-color: transparent;border: 1px solid transparent;border-radius: 0px;line-height: 1.4;">
                <input [(ngModel)]="data[option.name]"
+                      [disabled]="option.disabled"
                       [required]="option.required"
                       [max]="option.max"
                       [min]="option.min"
@@ -130,6 +134,7 @@
        <span *ngSwitchCase="'password'">
            <input type="password"
                   [required]="option.required"
+                  [disabled]="option.disabled"
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
                   class="form-control"
@@ -161,6 +166,7 @@
        <span *ngSwitchCase="'email'">
            <input type="email"
                   email
+                  [disabled]="option.disabled"
                   [required]="option.required"
                   [(ngModel)]="data[option.name]"
                   [name]="option.name"
@@ -185,6 +191,7 @@
               <div class="form-check form-check-inline"
                    *ngFor="let subOption of option.dataProvider">
                   <input [(ngModel)]="data[option.name]"
+                         [disabled]="option.disabled"
                          [name]="option.name"
                          [required]="option.required"
                          type="radio"
@@ -205,6 +212,7 @@
         <!--  ************************************* select ************************************* -->
         <div *ngSwitchCase="'select'">
           <select [(ngModel)]="data[option.name]"
+                  [disabled]="option.disabled"
                   [required]="option.required"
                   [name]="option.name"
                   class="form-control">
@@ -229,6 +237,7 @@
                   <input (change)="onCheckboxValueChange(data[option.name],subOption['value'],$event)"
                          [checked]="isCheckboxSelected(data[option.name],subOption['value'])"
                          [id]="subOption['id']"
+                         [disabled]="option.disabled"
                          [name]="option.name"
                          class="form-check-input"
                          type="checkbox">

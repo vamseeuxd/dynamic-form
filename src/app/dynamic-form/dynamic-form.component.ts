@@ -21,7 +21,7 @@ export class DynamicFormComponent implements OnInit {
     return Object.keys(this.validators).length <= 0;
   }
 
-  formDataChange() {
+  private formDataChange() {
     this.dataChange.emit(this.data);
   }
 
@@ -144,7 +144,7 @@ export class DynamicFormComponent implements OnInit {
     return selectedList ? (selectedList.indexOf(value) >= 0) : false;
   }
 
-  getResponsiveClassName(option: DynamicFormOption): string {
+  private getResponsiveClassName(option: DynamicFormOption): string {
     return 'mt-3' +
       ' col-xl-' + option.sizeXl +
       ' col-lg-' + option.sizeLg +
@@ -158,7 +158,7 @@ export class DynamicFormComponent implements OnInit {
       ' offset-xs-' + option.offsetXs;
   }
 
-  getOptionsToShow(options: DynamicFormOption[]): DynamicFormOption[] {
+  private getOptionsToShow(options: DynamicFormOption[]): DynamicFormOption[] {
     return options.filter(option => !option.hide);
   }
 }

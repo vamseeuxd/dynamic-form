@@ -167,7 +167,7 @@ export interface DynamicFormOption {
   required: boolean;
   disabled?: boolean;
   hide?: boolean;
-  type: string;
+  type: DynamicFormType;
   label: string;
   name: string;
   sizeXl: ColSize;
@@ -185,6 +185,18 @@ export interface DynamicFormOption {
   min?: any;
   max?: any;
   dataProvider?: { id: string, label: string, value: any }[];
+}
+
+export enum DynamicFormType {
+  TEXT = 'text',
+  NUMBER = 'number',
+  DATE = 'date',
+  RANGE = 'range',
+  PASSWORD = 'password',
+  EMAIL = 'email',
+  RADIO = 'radio',
+  SELECT = 'select',
+  CHECKBOX = 'checkbox',
 }
 
 export enum ColSize {

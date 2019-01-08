@@ -6,17 +6,6 @@
     <div class="card-body">
       <div class="container-fluid">
 
-        <!--
-        <button (click)="showAddNewFormController=true;" class="btn btn-primary mt-5">Add New Form Control</button>
-        <ngx-dynamic-form #test [(data)]="data" [options]="options"></ngx-dynamic-form>
-        -->
-
-        <!--
-        <app-dynamic-form-generator (cancel)="onNewControlCancel()"
-                                    (save)="addNewControl($event)"></app-dynamic-form-generator>
-        -->
-
-
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
             <a (click)="activeTab=0" [class]="'nav-link ' + ( activeTab==0 ? 'active' : '' )">Form Preview</a>
@@ -25,32 +14,15 @@
             <a (click)="activeTab=1" [class]="'nav-link ' + ( activeTab==1 ? 'active' : '' )">Form Config</a>
           </li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content border">
           <div [class]="'p-4 tab-pane fade show ' + ( activeTab==0 ? 'active' : '' )" style="min-height: 300px;">
             <ngx-dynamic-form #test [(data)]="data" [options]="options"></ngx-dynamic-form>
           </div>
           <div [class]="'p-4 tab-pane fade show ' + ( activeTab==1 ? 'active' : '' )" style="min-height: 300px;">
-            <div class="row">
-              <div class="col-2">
-                <ul class="list-group">
-                  <li (click)="editExistingComponent(option, formGen)"
-                      *ngFor="let option of options"
-                      [class]="'list-group-item '+(option.name==activeComponent?'active':'')">
-                    {{option.label}}
-                    <span class="float-right">
-                      <button class="btn btn-link btn-sm ml-5">&#x25B2;</button>
-                      <button class="btn btn-link btn-sm">&#x25BC;</button>
-                    </span>
-                    <span class="clearfix"></span>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-10">
-                <app-dynamic-form-generator #formGen (cancel)="onNewControlCancel()"
-                                            (save)="addNewControl($event)">
-                </app-dynamic-form-generator>
-              </div>
-            </div>
+            <app-form-config-tab (onComponentSelect)="editExistingComponent($event)"
+                                 (save)="addNewControl($event)"
+                                 [activeComponent]="activeComponent"
+                                 [options]="options"></app-form-config-tab>
           </div>
         </div>
 

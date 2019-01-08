@@ -1,0 +1,25 @@
+.action-bar {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -15.5px;
+}
+
+.side-meu {
+  position: absolute;
+  z-index: 5;
+  min-width: 250px;
+  height: 100%;
+  background-color: white;
+  border: 1px solid #ced4da;
+}
+
+.side-menu-toggle {
+  position: absolute;
+  z-index: 5;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="row position-relative">
+  <div *ngIf="openSideMenu" class="side-meu shadow">
+    <ul class="list-group">
+      <li (click)="editExistingComponent(option, formGen)"
+          *ngFor="let option of options"
+          [class]="'list-group-item '+(option.name==activeComponent?'active':'')">{{option.label}}
+        <span class="action-bar">
+          <button (click)="moveUp($event)" class="btn btn-primary btn-sm mr-2">&#x25B2;</button>
+          <button (click)="moveDown($event)" class="btn btn-primary btn-sm">&#x25BC;</button>
+        </span>
+        <span class="clearfix"></span>
+      </li>
+    </ul>
+  </div>
+  <button (click)="openSideMenu=!openSideMenu" [style.left]="(openSideMenu?'252px':'0px')"
+          class="btn btn-primary side-menu-toggle">
+    <i aria-hidden="true" class="fa fa-bars"></i>
+  </button>
+  <div class="col-12">
+    <app-dynamic-form-generator #formGen
+                                (cancel)="cancel.emit('')"
+                                (save)="save.emit($event)">
+    </app-dynamic-form-generator>
+  </div>
+</div>

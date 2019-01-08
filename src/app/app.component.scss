@@ -1,0 +1,14 @@
+.list-group-item {
+  cursor: pointer;
+
+  &.active {
+    .btn-link {
+      font-weight: 400;
+      color: #ffffff !important;
+
+      &:hover {
+        color: #ffffff !important;
+      }
+    }
+  }
+}

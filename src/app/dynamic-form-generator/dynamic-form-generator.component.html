@@ -7,9 +7,8 @@
     <hr>
     <div class="row">
       <div class="col-2">
-        <button (click)="addFormClick()" [disabled]="!test.isValid" class="btn-primary btn btn-block">Add Form
-          Controller
-        </button>
+        <button (click)="addFormClick()" [disabled]="!test.isValid"
+                class="btn-primary btn btn-block">{{saveButtonLabel}}</button>
       </div>
       <div class="col-2">
         <button (click)="cancel.emit(null)" class="btn-dark btn btn-block">Cancel</button>

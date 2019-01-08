@@ -9,6 +9,8 @@ import {ColSize, DynamicFormOption, DynamicFormType} from './dynamic-form/dynami
 export class AppComponent {
   options: DynamicFormOption[] = [];
   data = {};
+  activeTab = 0;
+  activeComponent = '';
   title = 'dynamic-form';
   showAddNewFormController = false;
 
@@ -18,5 +20,10 @@ export class AppComponent {
 
   onNewControlCancel() {
     this.showAddNewFormController = false;
+  }
+
+  editExistingComponent(option: DynamicFormOption, formGen) {
+    this.activeComponent = option.name;
+    formGen.data = JSON.parse(JSON.stringify(option));
   }
 }

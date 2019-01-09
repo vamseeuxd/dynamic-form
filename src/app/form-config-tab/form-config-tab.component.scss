@@ -3,6 +3,7 @@
   top: 50%;
   right: 10px;
   margin-top: -15.5px;
+  display: none;
 }
 
 .side-meu {
@@ -18,8 +19,30 @@
   position: absolute;
   z-index: 5;
   opacity: 0.3;
-
+  top: -20px;
   &:hover {
     opacity: 0.8;
+  }
+}
+
+.list-group-item {
+  cursor: pointer;
+
+  &:active {
+    background-color: #ffffff;
+    border-color: #ced4da;
+    color: #212529;
+  }
+
+  &.active {
+    background-color: #ced4da;
+    border-color: #ced4da;
+    color: #212529;
+  }
+
+  &:hover {
+    .action-bar {
+      display: inline-block;
+    }
   }
 }

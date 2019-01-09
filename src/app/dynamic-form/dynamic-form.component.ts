@@ -171,6 +171,8 @@ export interface DynamicFormOption {
   disabled?: boolean;
   hide?: boolean;
   type: DynamicFormType;
+  id?: string;
+  index?: number;
   label: string;
   name: string;
   sizeXl: ColSize;

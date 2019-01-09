@@ -20,8 +20,13 @@
           </div>
           <div [class]="'p-4 tab-pane fade show ' + ( activeTab==1 ? 'active' : '' )" style="min-height: 300px;">
             <app-form-config-tab (onComponentSelect)="editExistingComponent($event)"
+                                 (delete)="deleteControl($event)"
                                  (save)="addNewControl($event)"
+                                 (moveDown)="moveDownControl($event)"
+                                 (moveUp)="moveUpControl($event)"
+                                 *ngIf="resetForm"
                                  [activeComponent]="activeComponent"
+                                 [saveButtonLabel]="saveButtonLabel"
                                  [options]="options"></app-form-config-tab>
           </div>
         </div>

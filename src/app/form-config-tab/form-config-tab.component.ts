@@ -12,9 +12,13 @@ export class FormConfigTabComponent implements OnInit {
   @Output() onComponentSelect: EventEmitter<{ option: DynamicFormOption, formGen: any }> = new EventEmitter<{ option: DynamicFormOption, formGen: any }>();
   public openSideMenu = false;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
-  @Output() save: EventEmitter<any> = new EventEmitter<any>();
+  @Output() save: EventEmitter<{ controllerData: any, formGen: any }> = new EventEmitter<{ controllerData: any, formGen: any }>();
+  @Output() delete: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
+  @Output() moveDown: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
+  @Output() moveUp: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
   @Input() options: DynamicFormOption[] = [];
   @Input() activeComponent: DynamicFormOption;
+  @Input() saveButtonLabel = 'Add';
   @ViewChild('formGenView') formGen: DynamicFormGeneratorComponent;
 
   constructor() {
@@ -27,11 +31,18 @@ export class FormConfigTabComponent implements OnInit {
     this.onComponentSelect.emit({option, formGen});
   }
 
-  moveUp($event: MouseEvent) {
+  moveUpItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
     $event.stopImmediatePropagation();
+    this.moveUp.emit(option);
   }
 
-  moveDown($event: MouseEvent) {
+  moveDownItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
     $event.stopImmediatePropagation();
+    this.moveDown.emit(option);
+  }
+
+  deleteItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
+    $event.stopImmediatePropagation();
+    this.delete.emit(option);
   }
 }

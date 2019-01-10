@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ColSize, DynamicFormOption, DynamicFormType} from '../dynamic-form/dynamic-form.component';
 
 @Component({
@@ -11,7 +11,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   private options: DynamicFormOption[] = [];
-  private data = {
+  public data = {
     'required': true,
     'disabled': false,
     'hide': false,
@@ -26,6 +26,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
     'offsetSm': '0',
     'offsetXs': '0'
   };
+  @Input() saveButtonLabel = 'Add';
 
   constructor() {
     const config = [
@@ -312,9 +313,9 @@ export class DynamicFormGeneratorComponent implements OnInit {
       disabled: false,
       hide: false,
       desc: desc,
-      sizeXl: ColSize.col_2,
-      sizeLg: ColSize.col_2,
-      sizeMd: ColSize.col_2,
+      sizeXl: ColSize.col_4,
+      sizeLg: ColSize.col_4,
+      sizeMd: ColSize.col_4,
       sizeSm: ColSize.col_6,
       sizeXs: ColSize.col_12,
       offsetXl: ColSize.col_0,

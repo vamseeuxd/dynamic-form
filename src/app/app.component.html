@@ -1,3 +1,14 @@
 <div class="container-fluid">
-  <ngx-dynamic-form></ngx-dynamic-form>
+
+  <button (click)="showAddNewFormController=true;" class="btn btn-primary mt-5">Add New Form Control</button>
+
+  <hr>
+
+  <ngx-dynamic-form #test [(data)]="data" [options]="options"></ngx-dynamic-form>
+
+  <hr>
+
+  <app-dynamic-form-generator (cancel)="onNewControlCancel()" (save)="addNewControl($event)"
+                              *ngIf="showAddNewFormController"></app-dynamic-form-generator>
+
 </div>

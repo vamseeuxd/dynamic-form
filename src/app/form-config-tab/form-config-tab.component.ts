@@ -11,6 +11,7 @@ export class FormConfigTabComponent implements OnInit {
 
   @Output() onComponentSelect: EventEmitter<{ option: DynamicFormOption, formGen: any }> = new EventEmitter<{ option: DynamicFormOption, formGen: any }>();
   public openSideMenu = false;
+  showActionBar = false;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() save: EventEmitter<{ controllerData: any, formGen: any }> = new EventEmitter<{ controllerData: any, formGen: any }>();
   @Output() delete: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();

@@ -5,7 +5,7 @@
           *ngFor="let option of options; let optionIndex=index;"
           [class]="'list-group-item '+( option.name == activeComponent ? 'active' : '' )">{{option.label}}
         - {{option.index}}
-        <span class="action-bar">
+        <span [class]="showActionBar ? 'action-bar active' : 'action-bar'">
           <button (click)="deleteItem($event, optionIndex, option)" class="btn btn-danger btn-sm mr-2"><i
             class="fa fa-trash"></i></button>
           <button (click)="moveUpItem($event, optionIndex, option)" [disabled]="optionIndex==0"

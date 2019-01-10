@@ -43,6 +43,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
           {id: 'radio', label: 'RADIO', value: 'radio'},
           {id: 'select', label: 'SELECT', value: 'select'},
           {id: 'checkbox', label: 'CHECKBOX', value: 'checkbox'},
+          {id: 'textArea', label: 'TEXTAREA', value: 'textArea'},
         ]
       },
       {label: 'label', name: 'label', type: DynamicFormType.TEXT},
@@ -56,6 +57,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
       {label: 'Description', name: 'desc', type: DynamicFormType.TEXT, required: false},
       {label: 'Min', name: 'min', type: DynamicFormType.TEXT, required: false},
       {label: 'Max', name: 'max', type: DynamicFormType.TEXT, required: false},
+      {label: 'Row', name: 'row', type: DynamicFormType.TEXT, required: true},
       {label: 'Pattern', name: 'pattern', type: DynamicFormType.TEXT, required: false},
       {
         label: 'Required',
@@ -324,6 +326,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
       offsetXs: ColSize.col_0,
       min: null,
       max: null,
+      row: null,
       dataProvider: dataProvider,
     };
   }
@@ -336,6 +339,7 @@ export class DynamicFormGeneratorComponent implements OnInit {
     this.getControlByName('min').hide = false;
     this.getControlByName('max').hide = false;
     this.getControlByName('pattern').hide = true;
+    this.getControlByName('row').hide = true;
     switch ($event.type) {
       case DynamicFormType.TEXT:
       case DynamicFormType.PASSWORD:
@@ -369,6 +373,15 @@ export class DynamicFormGeneratorComponent implements OnInit {
         this.getControlByName('min').type = DynamicFormType.NUMBER;
         this.getControlByName('max').label = 'Max Options Allowed :';
         this.getControlByName('max').type = DynamicFormType.NUMBER;
+        break;
+      case DynamicFormType.TEXTAREA:
+        this.getControlByName('row').label = 'Min Rows Allowed :';
+        this.getControlByName('row').type = DynamicFormType.NUMBER;
+        this.getControlByName('min').label = 'Min charecters Allowed :';
+        this.getControlByName('min').type = DynamicFormType.NUMBER;
+        this.getControlByName('max').label = 'Max charecters Allowed :';
+        this.getControlByName('max').type = DynamicFormType.NUMBER;
+        this.getControlByName('row').hide = false;
         break;
     }
   }

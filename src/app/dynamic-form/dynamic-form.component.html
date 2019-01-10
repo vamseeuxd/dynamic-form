@@ -184,6 +184,40 @@
             </small>
        </span>
 
+        <!--  ************************************* Text Area ************************************* -->
+       <span *ngSwitchCase="'textArea'">
+           <textarea type="text"
+                  [rows]="option.row"
+                  [minlength]="option.min"
+                  [maxlength] = "option.max"
+                  [disabled]="option.disabled"
+                  [required]="option.required"
+                  [(ngModel)]="data[option.name]"
+                  [name]="option.name"
+                  class="form-control"
+                     [placeholder]="'Enter '+option.label"> </textarea>
+
+            <small *ngIf="dynamicForm.controls[option.name]?.pristine"
+                   class="form-text text-muted">{{option.desc}}</small>
+            <small class="form-text text-danger"
+                   *ngIf="isValidationError(dynamicForm, option, 'required')">
+              Provide valid {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'minlength')"
+                   class="form-text text-danger">
+              Provide Minimum {{option.min}} charters for {{option.label}}
+            </small>
+            <small *ngIf="isValidationError(dynamicForm, option, 'maxlength')"
+                   class="form-text text-danger">
+              Provide Maximum {{option.max}} charters for {{option.label}}
+            </small>
+       </span>
+
+        <!--  ************************************* File Upload ************************************* -->
+       <span *ngSwitchCase="'file'">
+
+       </span>
+
         <!--  ************************************* Radio ************************************* -->
         <div *ngSwitchCase="'radio'">
             <div class="form-control form-controller-bg">

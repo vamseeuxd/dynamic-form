@@ -187,6 +187,7 @@ export interface DynamicFormOption {
   desc?: string;
   min?: any;
   max?: any;
+  row?: any;
   dataProvider?: { id: string, label: string, value: any }[];
 }
 
@@ -200,6 +201,7 @@ export enum DynamicFormType {
   RADIO = 'radio',
   SELECT = 'select',
   CHECKBOX = 'checkbox',
+  TEXTAREA = 'textArea',
 }
 
 export enum ColSize {

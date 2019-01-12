@@ -68,12 +68,11 @@ export class AppComponent {
     }
   ];
   data = {};
+
   resetForm = true;
-  activeTab = 0;
+  openFormConfigContainer = false;
   saveButtonLabel = 'Add';
   activeComponent = '';
-  title = 'dynamic-form';
-  showAddNewFormController = false;
   controlInUpdate: DynamicFormOption = null;
 
   addNewControl($event: { controllerData: DynamicFormOption, formGen: any }) {
@@ -82,11 +81,7 @@ export class AppComponent {
       if (isUniqueName) {
         $event.controllerData.id = new Date().getTime().toString();
         this.options.push($event.controllerData);
-        this.saveButtonLabel = 'Add';
-        this.resetForm = false;
-        setTimeout(() => {
-          this.resetForm = true;
-        });
+        this.cancelClickHandler();
       } else {
         alert('Already Controller exists with same name.');
       }
@@ -98,19 +93,21 @@ export class AppComponent {
             this.options[i] = $event.controllerData;
           }
         }
-        this.saveButtonLabel = 'Add';
-        this.resetForm = false;
-        setTimeout(() => {
-          this.resetForm = true;
-        });
+        this.cancelClickHandler();
       } else {
         alert('Already Controller exists with same name.');
       }
     }
   }
 
-  onNewControlCancel() {
-    this.showAddNewFormController = false;
+  cancelClickHandler() {
+    this.activeComponent = null;
+    this.controlInUpdate = null;
+    this.saveButtonLabel = 'Add';
+    this.resetForm = false;
+    setTimeout(() => {
+      this.resetForm = true;
+    });
   }
 
   editExistingComponent($event: { option: DynamicFormOption, formGen: any }) {

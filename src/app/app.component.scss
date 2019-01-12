@@ -1,14 +1,41 @@
-.list-group-item {
-  cursor: pointer;
+.config-form-model {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
 
-  &.active {
-    .btn-link {
-      font-weight: 400;
-      color: #ffffff !important;
+  &.show {
+    opacity: 1;
+    pointer-events: all;
+  }
 
-      &:hover {
-        color: #ffffff !important;
-      }
+  .form-container {
+    display: inline-block;
+    background-color: white;
+    width: 600px;
+    padding: 40px;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+    top: 8%;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 575px) {
+    .form-container {
+      width: auto;
+      margin: auto 20px;
+      padding: 20px 40px;
+      left: auto;
+      max-height: calc(100vh - 16%);
     }
   }
+
 }

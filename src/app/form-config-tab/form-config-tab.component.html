@@ -4,7 +4,6 @@
       <li (click)="editExistingComponent(option, formGen)"
           *ngFor="let option of options; let optionIndex=index;"
           [class]="'list-group-item '+( option.name == activeComponent ? 'active' : '' )">{{option.label}}
-        - {{option.index}}
         <span [class]="showActionBar ? 'action-bar active' : 'action-bar'">
           <button (click)="deleteItem($event, optionIndex, option)" class="btn btn-danger btn-sm mr-2"><i
             class="fa fa-trash"></i></button>
@@ -17,7 +16,7 @@
       </li>
     </ul>
   </div>
-  <button (click)="openSideMenu=!openSideMenu" [style.left]="(openSideMenu?'252px':'0px')"
+  <button (click)="openSideMenu=!openSideMenu" [style.left]="(openSideMenu?'0px':'0px')"
           class="btn btn-primary side-menu-toggle">
     <i aria-hidden="true" class="fa fa-bars"></i>
   </button>

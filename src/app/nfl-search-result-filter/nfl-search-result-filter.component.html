@@ -1,10 +1,10 @@
-<label class="title">Test Result</label>
-<label class="board-type">Asimav - Build Plan ID : 12</label>
+<label class="title">{{title}}</label>
+<label class="board-type">{{boardType}}</label>
 <label class="board-quantity separator">|</label>
-<label class="board-quantity">No of Boards : <span class="quantity">4</span></label>
+<label class="board-quantity">No of Boards : <span class="quantity">{{boardQuantity}}</span></label>
 <div class="menu-bar">
-  <label class="menu-item">View Logs</label>
-  <label class="menu-item">Visual Snapshot</label>
+  <label class="menu-item" (click)="viewLogsClick.emit('View Logs')">View Logs</label>
+  <label class="menu-item" (click)="visualSnapshotClick.emit('Visual Snapshot')">Visual Snapshot</label>
 </div>
 <div class="action-button">
   <i class="fa fa-search search-button"></i>

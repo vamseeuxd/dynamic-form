@@ -1,12 +1,12 @@
 <div class="row">
-  <ngx-dynamic-form #test (dataChange)="onDateChange($event)" [(data)]="data" [options]="options"></ngx-dynamic-form>
+  <ngx-dynamic-form #formGen (dataChange)="onDateChange($event)" [(data)]="data" [options]="options"></ngx-dynamic-form>
 </div>
 <div class="row pt-3">
-  <div class="col-2">
-    <button (click)="addFormClick()" [disabled]="!test.isValid"
+  <div class="col-6">
+    <button (click)="addFormClick()" [disabled]="!formGen.isValid"
             class="btn-primary btn btn-block">{{saveButtonLabel}}</button>
   </div>
-  <div class="col-2">
+  <div class="col-6">
     <button (click)="cancel.emit(null)" class="btn-dark btn btn-block">Cancel</button>
   </div>
 </div>

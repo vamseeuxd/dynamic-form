@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ColSize, DynamicFormOption, DynamicFormType} from '../dynamic-form/dynamic-form.component';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ColSize, DynamicFormOption, DynamicFormType} from '../../dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'app-dynamic-form-generator',
@@ -27,8 +27,9 @@ export class DynamicFormGeneratorComponent implements OnInit {
     'offsetXs': '0'
   };
   @Input() saveButtonLabel = 'Add';
-
+  @ViewChild('formGen') formGen: DynamicFormGeneratorComponent;
   constructor() {
+
     const config = [
       {
         label: 'Type',
@@ -277,7 +278,6 @@ export class DynamicFormGeneratorComponent implements OnInit {
         ]
       },
     ];
-    // ^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$
     config.forEach(value => {
       this.options.push(
         this.getFormController(
@@ -313,9 +313,9 @@ export class DynamicFormGeneratorComponent implements OnInit {
       disabled: false,
       hide: false,
       desc: desc,
-      sizeXl: ColSize.col_4,
-      sizeLg: ColSize.col_4,
-      sizeMd: ColSize.col_4,
+      sizeXl: ColSize.col_6,
+      sizeLg: ColSize.col_6,
+      sizeMd: ColSize.col_6,
       sizeSm: ColSize.col_6,
       sizeXs: ColSize.col_12,
       offsetXl: ColSize.col_0,

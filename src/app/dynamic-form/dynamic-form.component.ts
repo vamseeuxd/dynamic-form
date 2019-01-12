@@ -8,6 +8,8 @@ import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnI
 export class DynamicFormComponent implements OnInit {
   @Output() isValidChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() options: DynamicFormOption[] = [];
+  @Input() isEditable = false;
+  @Output() onOptionEditClick: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
   public validators = {};
 
   constructor(private cdRef: ChangeDetectorRef) {
@@ -172,6 +174,7 @@ export interface DynamicFormOption {
   hide?: boolean;
   type: DynamicFormType;
   id?: string;
+  formId?: string;
   index?: number;
   label: string;
   name: string;

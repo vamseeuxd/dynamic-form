@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DynamicFormOption} from '../dynamic-form/dynamic-form.component';
-import {DynamicFormGeneratorComponent} from '../dynamic-form-generator/dynamic-form-generator.component';
+import {DynamicFormGeneratorComponent} from './dynamic-form-generator/dynamic-form-generator.component';
 
 @Component({
   selector: 'app-form-config-tab',
@@ -8,6 +8,7 @@ import {DynamicFormGeneratorComponent} from '../dynamic-form-generator/dynamic-f
   styleUrls: ['./form-config-tab.component.scss']
 })
 export class FormConfigTabComponent implements OnInit {
+  @ViewChild('formGen') formGen: DynamicFormGeneratorComponent;
 
   @Output() onComponentSelect: EventEmitter<{ option: DynamicFormOption, formGen: any }> = new EventEmitter<{ option: DynamicFormOption, formGen: any }>();
   public openSideMenu = false;
@@ -20,7 +21,10 @@ export class FormConfigTabComponent implements OnInit {
   @Input() options: DynamicFormOption[] = [];
   @Input() activeComponent: DynamicFormOption;
   @Input() saveButtonLabel = 'Add';
-  @ViewChild('formGenView') formGen: DynamicFormGeneratorComponent;
+
+  get formRef() {
+    return this.formGen.formGen;
+  }
 
   constructor() {
   }

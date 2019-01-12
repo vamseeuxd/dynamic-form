@@ -1,39 +1,30 @@
 <div class="container-fluid">
-  <div class="card">
-    <div class="card-header">
-      Dynamic Form Generator
+  <div class="row">
+    <div class="col-12">
+      <button (click)="openFormConfigContainer=true;" class="btn btn-primary float-right mt-3">Edit</button>
     </div>
-    <div class="card-body">
-      <div class="container-fluid">
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a (click)="activeTab=0" [class]="'nav-link ' + ( activeTab==0 ? 'active' : '' )">Form Preview</a>
-          </li>
-          <li class="nav-item">
-            <a (click)="activeTab=1" [class]="'nav-link ' + ( activeTab==1 ? 'active' : '' )">Form Config</a>
-          </li>
-        </ul>
-        <div class="tab-content border">
-          <div [class]="'p-4 tab-pane fade show ' + ( activeTab==0 ? 'active' : '' )" style="min-height: 300px;">
-            <ngx-dynamic-form #test [(data)]="data" [options]="options"></ngx-dynamic-form>
-          </div>
-          <div [class]="'p-4 tab-pane fade show ' + ( activeTab==1 ? 'active' : '' )" style="min-height: 300px;">
-            <app-form-config-tab (onComponentSelect)="editExistingComponent($event)"
-                                 (delete)="deleteControl($event)"
-                                 (save)="addNewControl($event)"
-                                 (moveDown)="moveDownControl($event)"
-                                 (moveUp)="moveUpControl($event)"
-                                 *ngIf="resetForm"
-                                 [activeComponent]="activeComponent"
-                                 [saveButtonLabel]="saveButtonLabel"
-                                 [options]="options"></app-form-config-tab>
-          </div>
-        </div>
-
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <ngx-dynamic-form [(data)]="data" [isEditable]="false" [options]="options"></ngx-dynamic-form>
     </div>
   </div>
 </div>
 
-
+<div [class]="openFormConfigContainer ? 'config-form-model show' : 'config-form-model'">
+  <div class="form-container">
+    <i class="fa fa-times" (click)="openFormConfigContainer=false;cancelClickHandler();"
+       style="position: absolute;top:10px;right:10px;cursor:pointer;"></i>
+    <app-form-config-tab (onComponentSelect)="editExistingComponent($event)"
+                         (delete)="deleteControl($event)"
+                         (save)="addNewControl($event)"
+                         (cancel)="cancelClickHandler()"
+                         (moveDown)="moveDownControl($event)"
+                         (moveUp)="moveUpControl($event)"
+                         *ngIf="resetForm"
+                         #formConfig
+                         [activeComponent]="activeComponent"
+                         [saveButtonLabel]="saveButtonLabel"
+                         [options]="options"></app-form-config-tab>
+  </div>
+</div>

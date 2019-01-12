@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {DynamicFormComponent} from './dynamic-form/dynamic-form.component';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DynamicFormGeneratorComponent} from './dynamic-form-generator/dynamic-form-generator.component';
+import {DynamicFormGeneratorComponent} from './form-config-tab/dynamic-form-generator/dynamic-form-generator.component';
 import {FormConfigTabComponent} from './form-config-tab/form-config-tab.component';
 import {NflSearchResultFilterComponent} from './nfl-search-result-filter/nfl-search-result-filter.component';
 

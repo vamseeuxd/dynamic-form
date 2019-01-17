@@ -1,0 +1,7 @@
+<label (click)="changeSort(column)" *ngFor="let column of columns" [ngSwitch]="column.sort" [style.width]="column.width"
+       [title]="column.title" class="column">
+  {{column.title}}
+  <i *ngSwitchCase="columnSortState.NO_SORT" aria-hidden="true" class="sort-arrow fa fa-sort"></i>
+  <i *ngSwitchCase="columnSortState.ASCENDING" aria-hidden="true" class="sort-arrow fa fa-sort-asc"></i>
+  <i *ngSwitchCase="columnSortState.DESCENDING" aria-hidden="true" class="sort-arrow fa fa-sort-desc"></i>
+</label>

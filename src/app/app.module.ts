@@ -9,6 +9,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DynamicFormGeneratorComponent} from './form-config-tab/dynamic-form-generator/dynamic-form-generator.component';
 import {FormConfigTabComponent} from './form-config-tab/form-config-tab.component';
 import {NflSearchResultFilterComponent} from './nfl-search-result-filter/nfl-search-result-filter.component';
+import {TableHeaderComponentComponentComponent} from './table-header-component-component/table-header-component-component.component';
+import {PageOneComponent} from './page-one/page-one.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import {NflSearchResultFilterComponent} from './nfl-search-result-filter/nfl-sea
     DynamicFormGeneratorComponent,
     FormConfigTabComponent,
     NflSearchResultFilterComponent,
+    TableHeaderComponentComponentComponent,
+    PageOneComponent,
   ],
   imports: [
     CommonModule,

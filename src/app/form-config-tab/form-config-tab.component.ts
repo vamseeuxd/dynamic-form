@@ -19,7 +19,7 @@ export class FormConfigTabComponent implements OnInit {
   @Output() moveDown: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
   @Output() moveUp: EventEmitter<DynamicFormOption> = new EventEmitter<DynamicFormOption>();
   @Input() options: DynamicFormOption[] = [];
-  @Input() activeComponent: DynamicFormOption;
+  @Input() activeComponent: string;
   @Input() saveButtonLabel = 'Add';
 
   get formRef() {
@@ -37,17 +37,17 @@ export class FormConfigTabComponent implements OnInit {
   }
 
   moveUpItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
-    $event.stopImmediatePropagation();
+    // $event.stopImmediatePropagation();
     this.moveUp.emit(option);
   }
 
   moveDownItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
-    $event.stopImmediatePropagation();
+    // $event.stopImmediatePropagation();
     this.moveDown.emit(option);
   }
 
   deleteItem($event: MouseEvent, optionIndex, option: DynamicFormOption) {
-    $event.stopImmediatePropagation();
+    // $event.stopImmediatePropagation();
     this.delete.emit(option);
   }
 }

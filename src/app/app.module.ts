@@ -12,6 +12,7 @@ import {NflSearchResultFilterComponent} from './nfl-search-result-filter/nfl-sea
 import {TableHeaderComponentComponentComponent} from './table-header-component-component/table-header-component-component.component';
 import {PageOneComponent} from './page-one/page-one.component';
 import {FocusDirective} from './directives/focus.directive';
+import {ModalModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,13 @@ import {FocusDirective} from './directives/focus.directive';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
+  entryComponents: [
+    FormConfigTabComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

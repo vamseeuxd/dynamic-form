@@ -1,4 +1,4 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'ngx-dynamic-form',
@@ -17,6 +17,7 @@ export class DynamicFormComponent implements OnInit {
 
   @Input() data = {};
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
+  @ViewChild('dynamicForm') form: any;
 
   public get isValid(): boolean {
     this.cdRef.detectChanges();

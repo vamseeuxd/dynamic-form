@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import {ColSize, DynamicFormOption, DynamicFormType} from './dynamic-form/dynamic-form.component';
 import {FormsService, IFormData} from './services/forms.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {FormConfigTabComponent} from './form-config-tab/form-config-tab.component';
+import {ControllerService} from './services/controller.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,7 @@ export class AppComponent {
   public updateFormName = '';
   public activeForm: IFormData;
 
-  constructor(public formsService: FormsService) {
+  constructor(public formsService: FormsService, public controllerService: ControllerService) {
     this.formsService.itemRef.subscribe(value => {
       this.forms = value;
       this.activeForm = null;

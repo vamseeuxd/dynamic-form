@@ -1,10 +1,54 @@
-<div class="row position-relative">
-  <div *ngIf="openSideMenu" class="side-meu shadow">
-    <ul class="list-group">
-      <li (click)="editExistingComponent(option, formGen)"
-          *ngFor="let option of options; let optionIndex=index;"
-          [class]="'list-group-item '+( option.name == activeComponent ? 'active' : '' )">{{option.label}}
-        <span [class]="showActionBar ? 'action-bar active' : 'action-bar'">
+<div class="modal-header">
+  <h6 class="p-0 m-0 modal-title pull-left">Manage Form Controls</h6>
+  <button (click)="cancel.emit('close')" aria-label="Close" class="close pull-right" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body pt-0">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-2">
+        <ul class="list-group mt-1" style="margin-left: -25px;">
+          <li (click)="editExistingComponent(option, formGen)"
+              *ngFor="let option of options; let optionIndex=index;"
+              [class]="'list-group-item '+( option.name == activeComponent ? 'active' : '' )">
+            {{option.label}}
+            <span class="action-bar">
+
+              <button (click)="deleteItem($event, optionIndex, option)"
+                      class="btn btn-danger btn-sm mr-1">
+                <i class="fa fa-trash"></i>
+              </button>
+
+              <button (click)="moveUpItem($event, optionIndex, option)"
+                      [disabled]="optionIndex==0"
+                      class="btn btn-secondary btn-sm mr-1">&#x25B2;</button>
+
+              <button (click)="moveDownItem($event, optionIndex, option)"
+                      [disabled]="optionIndex==options.length-1"
+                      class="btn btn-secondary btn-sm">&#x25BC;</button>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-10">
+        <app-dynamic-form-generator #formGen
+                                    (save)="save.emit({controllerData:$event,formGen:formGen})"
+                                    (cancel)="cancel.emit('')"
+                                    [saveButtonLabel]="saveButtonLabel">
+        </app-dynamic-form-generator>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div *ngIf="openSideMenu" class="side-meu shadow">
+      <ul class="list-group">
+        <li (click)="editExistingComponent(option, formGen)"
+            *ngFor="let option of options; let optionIndex=index;"
+            [class]="'list-group-item '+( option.name == activeComponent ? 'active' : '' )">{{option.label}}
+          <span [class]="showActionBar ? 'action-bar active' : 'action-bar'">
           <button (click)="deleteItem($event, optionIndex, option)" class="btn btn-danger btn-sm mr-2"><i
             class="fa fa-trash"></i></button>
           <button (click)="moveUpItem($event, optionIndex, option)" [disabled]="optionIndex==0"
@@ -12,19 +56,11 @@
           <button (click)="moveDownItem($event, optionIndex, option)" [disabled]="optionIndex==options.length-1"
                   class="btn btn-info btn-sm">&#x25BC;</button>
         </span>
-        <span class="clearfix"></span>
-      </li>
-    </ul>
-  </div>
-  <button (click)="openSideMenu=!openSideMenu" [style.left]="(openSideMenu?'0px':'0px')"
-          class="btn btn-primary side-menu-toggle">
-    <i aria-hidden="true" class="fa fa-bars"></i>
-  </button>
-  <div class="col-12">
-    <app-dynamic-form-generator #formGen
-                                (save)="save.emit({controllerData:$event,formGen:formGen})"
-                                (cancel)="cancel.emit('')"
-                                [saveButtonLabel]="saveButtonLabel">
-    </app-dynamic-form-generator>
-  </div>
-</div>
+          <span class="clearfix"></span>
+        </li>
+      </ul>
+    </div>
+    <button (click)="openSideMenu=!openSideMenu" [style.left]="(openSideMenu?'0px':'0px')"
+            class="btn btn-primary side-menu-toggle">
+      <i aria-hidden="true" class="fa fa-bars"></i>
+    </button>-->

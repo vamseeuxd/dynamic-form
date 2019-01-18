@@ -11,6 +11,7 @@ import {FormConfigTabComponent} from './form-config-tab/form-config-tab.componen
 import {NflSearchResultFilterComponent} from './nfl-search-result-filter/nfl-search-result-filter.component';
 import {TableHeaderComponentComponentComponent} from './table-header-component-component/table-header-component-component.component';
 import {PageOneComponent} from './page-one/page-one.component';
+import {FocusDirective} from './directives/focus.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {PageOneComponent} from './page-one/page-one.component';
     NflSearchResultFilterComponent,
     TableHeaderComponentComponentComponent,
     PageOneComponent,
+    FocusDirective,
   ],
   imports: [
     CommonModule,

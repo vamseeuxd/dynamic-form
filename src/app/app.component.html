@@ -7,73 +7,44 @@
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span data-feather="home"></span>Dashboard <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Integrations
-            </a>
-          </li>
-        </ul>
 
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
+          <li class="nav-item position-relative" *ngFor="let form of forms">
+
+            <a *ngIf="!form.isEdit"
+               [class]="form.isActive ? 'nav-link active' : 'nav-link'"
+               (click)="formsService.setActive(form)">
+              {{form.name}}
             </a>
+
+            <i class="fa fa-trash"
+               (click)="formsService.remove(form)"
+               style="cursor:pointer;position: absolute;top: 11.5px;right: 10px"></i>
+
+            <i class="fa fa-edit"
+               *ngIf="!form.isEdit"
+               (click)="formsService.updateEdit(true,form);updateFormName=form.name"
+               style="cursor:pointer;position: absolute;top: 12px;right: 30px"></i>
+
+            <i class="fa fa-times"
+               *ngIf="form.isEdit"
+               (click)="formsService.updateEdit(false,form);updateFormName=''"
+               style="cursor:pointer;position: absolute;top: 12px;right: 30px"></i>
+
+            <input type="text"
+                   (keyup.enter)="updateForm(form)"
+                   *ngIf="form.isEdit"
+                   [focus]="form.isEdit"
+                   [(ngModel)]="updateFormName"
+                   placeholder="Provide new form name & Enter"
+                   class="form-control"
+                   style="font-size: 12px;width: 94% !important;margin-left: 5%;">
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
+
+          <li class="nav-item p-2">
+            <input type="text" (keyup.enter)="addNewForm()"
+                   [(ngModel)]="newFormName"
+                   placeholder="Provide new form name & Enter"
+                   class="form-control" style="font-size: 12px;">
           </li>
         </ul>
       </div>
@@ -81,43 +52,8 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <app-page-one></app-page-one>
+        <h1 class="h2" *ngIf="activeForm">{{activeForm.name}}</h1>
       </div>
     </main>
   </div>
 </div>
-
-
-<!--
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <button (click)="openFormConfigContainer=true;" class="btn btn-primary float-right mt-3">Edit</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <ngx-dynamic-form [(data)]="data" [isEditable]="false" [options]="options"></ngx-dynamic-form>
-    </div>
-  </div>
-</div>
-
-<div [class]="openFormConfigContainer ? 'config-form-model show' : 'config-form-model'">
-  <div class="form-container">
-    <i class="fa fa-times" (click)="openFormConfigContainer=false;cancelClickHandler();"
-       style="position: absolute;top:10px;right:10px;cursor:pointer;"></i>
-    <app-form-config-tab (onComponentSelect)="editExistingComponent($event)"
-                         (delete)="deleteControl($event)"
-                         (save)="addNewControl($event)"
-                         (cancel)="cancelClickHandler()"
-                         (moveDown)="moveDownControl($event)"
-                         (moveUp)="moveUpControl($event)"
-                         *ngIf="resetForm"
-                         #formConfig
-                         [activeComponent]="activeComponent"
-                         [saveButtonLabel]="saveButtonLabel"
-                         [options]="options"></app-form-config-tab>
-  </div>
-</div>
--->

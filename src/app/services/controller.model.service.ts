@@ -6,7 +6,7 @@ import {ColSize, DynamicFormOption, DynamicFormType} from '../dynamic-form/dynam
 @Injectable({
   providedIn: 'root'
 })
-export class ControllerService {
+export class ControllerModelService {
   options: DynamicFormOption[] = [
     {
       'required': true,
